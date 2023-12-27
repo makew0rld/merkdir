@@ -44,7 +44,6 @@ func gen(ctx *cli.Context) error {
 	var totalSize int64
 	err := fs.WalkDir(dirFS, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
-			// XXX: For now stop on all errors instead of warning about them
 			return err
 		}
 		if d.IsDir() {
@@ -171,14 +170,15 @@ func inclusion(ctx *cli.Context) error {
 		return writeInclusionProof(proof, ctx.String("output"))
 	}
 	// Text version of inclusion proof
-	fmt.Println("== Text explanation of inclusion proof ==")
-	fmt.Printf("Tree size: %d\n", len(t.Files))
-	fmt.Printf("Provided file (%s) corresponds to leaf index %d\n", ctx.String("file"), proof.LeafIndex)
-	fmt.Printf("Tree root hash: %x\n", t.Root.Hash)
-	fmt.Printf("File nonce: %x\n", proof.Nonce)
-	fmt.Println("Operations to calculate that root hash:")
-	fmt.Println("digest = hash(0x00 || nonce || file data)")
-	// TODO: complete
+	// fmt.Println("== Text explanation of inclusion proof ==")
+	// fmt.Printf("Tree size: %d\n", len(t.Files))
+	// fmt.Printf("Provided file (%s) corresponds to leaf index %d\n", ctx.String("file"), proof.LeafIndex)
+	// fmt.Printf("Tree root hash: %x\n", t.Root.Hash)
+	// fmt.Printf("File nonce: %x\n", proof.Nonce)
+	// fmt.Println("Operations to calculate that root hash:")
+	// fmt.Println("digest = hash(0x00 || nonce || file data)")
+	fmt.Println("Text explanation of inclusion proof is not implemented.",
+		"Use --output/-o to store the binary proof instead.")
 	return nil
 }
 
@@ -214,7 +214,7 @@ func verifyFile(ctx *cli.Context) error {
 		return nil
 	}
 	fmt.Println("NOT OK: file has changed and is not part of the Merkle tree")
-	return nil // TODO: should this be an error?
+	return nil
 }
 
 func verifyInclusion(ctx *cli.Context) error {
@@ -268,7 +268,6 @@ func info(ctx *cli.Context) error {
 		if err != nil {
 			return fmt.Errorf("error finding leaf from inclusion proof in tree: %w", err)
 		}
-
 		fmt.Printf("File index: %d\n", ip.LeafIndex)
 		fmt.Printf("File name: %s\n", leaf.Name)
 		fmt.Printf("Nonce: %x\n", ip.Nonce)
