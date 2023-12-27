@@ -278,7 +278,7 @@ func info(ctx *cli.Context) error {
 	// Info for tree
 	fmt.Printf("Root hash: %x\n", t.Root.Hash)
 	fmt.Printf("FS root: %s\n", t.Path)
-	fmt.Printf("# of files: %d\n", len(t.Files))
+	fmt.Printf("Num. of files: %d\n", len(t.Files))
 	fmt.Printf("Creation time: %v\n", t.CreatedAt)
 	return nil
 }

@@ -7,11 +7,27 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+// Set by goreleaser or just
+var (
+	version string
+	commit  string
+	date    string
+	builtBy string
+)
+
 func main() {
 	app := &cli.App{
 		Name:  "merkdir",
 		Usage: "create merkle trees of your directories",
 		Commands: []*cli.Command{
+			{
+				Name:  "version",
+				Usage: "get version information",
+				Action: func(ctx *cli.Context) error {
+					fmt.Printf("%s\n%s\n%s\n%s\n", version, commit, date, builtBy)
+					return nil
+				},
+			},
 			{
 				Name:   "gen",
 				Usage:  "generate a merkle tree",
