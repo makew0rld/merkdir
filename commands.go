@@ -88,8 +88,12 @@ func gen(ctx *cli.Context) error {
 					errCh <- err
 					return
 				}
-				defer f.Close()
+				// Close f manually so that files aren't left open while the loop runs
+				// Otherwise the max open file limit will be hit for large dirs on at
+				// least some OSes like macOS.
+
 				leaf, err := merkle.CreateLeaf(path, &pbReader{bar, f}, nil)
+				f.Close()
 				if err != nil {
 					errCh <- err
 					return
