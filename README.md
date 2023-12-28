@@ -14,6 +14,17 @@ Using the power of Merkle trees, `merkdir` allows you to prove things about mill
 
 Pre-built binaries can be installed from the releases page. Otherwise you can build from source by using [`just`](https://github.com/casey/just). The Go compiler is of course required.
 
+If you use [Homebrew](https://brew.sh/), you can install `merkdir` through the my personal tap.
+```
+brew tap makew0rld/tap
+brew install merkdir
+```
+You can update it with:
+```
+brew upgrade merkdir
+```
+
+
 ## Usage
 
 ```bash
