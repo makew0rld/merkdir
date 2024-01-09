@@ -10,6 +10,10 @@ At some later date, you can publish one of these (unchanged) documents along wit
 
 Using the power of Merkle trees, `merkdir` allows you to prove things about millions of files at once. It can make signing or timestamping all the files in your home directory efficient and secure.
 
+The real world applications are slim, but interesting. Maybe I'm a whistleblower with thousands of files, but I don't want to release them all right now. This tool allows you to easily prove that a file you release later was part of the original collection.
+
+Another use case might be an organization that has a large archive of important files. This tool allows them to efficiently sign all of these files by just signing the root hash. 
+
 ## Install
 
 Pre-built binaries can be installed from the releases page. Otherwise you can build from source by using [`just`](https://github.com/casey/just). The Go compiler is of course required.
